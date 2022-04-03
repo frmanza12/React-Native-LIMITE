@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
@@ -14,41 +15,34 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import {
   ApplicationProvider,
-  Button,
-  Icon,
   IconRegistry,
-  Layout,
-  Text,
 } from '@ui-kitten/components';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import * as eva from '@eva-design/eva';
-
-/**
- * Use any valid `name` property from eva icons (e.g `github`, or `heart-outline`)
- * https://akveo.github.io/eva-icons
- */
-const HeartIcon = (props) => (
-  <Icon {...props} name='heart'/>
-);
+import {Home} from './src/views/home/Home';
+import Teams from './src/views/teams/container/Teams';
+import Users from './src/views/users/containers/Users';
+const Stack = createNativeStackNavigator();
 
 export default () => (
   <>
-    <IconRegistry icons={EvaIconsPack}/>
+    <IconRegistry icons={EvaIconsPack} />
     <ApplicationProvider {...eva} theme={eva.light}>
-      <Layout style={styles.container}>
-        <Text style={styles.text} category='h1'>
-          Welcome to UI Kitten 😻
-        </Text>
-        <Text style={styles.text} category='s1'>
-          Start with editing App.js to configure your App
-        </Text>
-        <Text style={styles.text} appearance='hint'>
-          For example, try changing theme to Dark by using eva.dark
-        </Text>
-        <Button style={styles.likeButton} accessoryLeft={HeartIcon}>
-          LIKE
-        </Button>
-      </Layout>
+
+      <NavigationContainer>
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: false,
+          }}>
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Users" component={Users} />
+
+          <Stack.Screen name="Teams" component={Teams} />
+
+        </Stack.Navigator>
+      </NavigationContainer>
     </ApplicationProvider>
   </>
 );
