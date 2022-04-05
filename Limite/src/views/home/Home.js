@@ -2,9 +2,8 @@
 /* eslint-disable semi */
 import React, { useEffect, useRef } from 'react'
 import { Layout, Button, Icon } from '@ui-kitten/components'
-import { ImageBackground, StyleSheet, Text, View } from "react-native";
+import { ImageBackground, StyleSheet } from "react-native";
 import backgroundImage from '../../assets/images/home_background.png';
-import { backgroundColor } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
 
 
 export const Home = ({navigation}) => {

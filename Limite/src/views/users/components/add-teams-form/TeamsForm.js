@@ -1,39 +1,42 @@
 /* eslint-disable prettier/prettier */
-import React , { useRef } from 'react'
-import { Layout, Button , Input, Icon} from '@ui-kitten/components'
+import React, { useRef } from 'react'
+import { Layout, Input, Text } from '@ui-kitten/components'
+import { StyleSheet } from "react-native";
+import { linear } from 'react-native/Libraries/Animated/Easing';
 
-const AddIcon = (props) => (
-        <Icon {...props} name='plus-circle'/>
-  );
 
-export default function TeamsForm() {
-    const num = useRef();
+export default function TeamsForm({getNteams}) {
+    const inputRef = useRef();
     const [nteam, setNteam] = React.useState('');
-    const addTeam = () => {
-     const numer = num.current.value;
-     if(numer !== ''){
-      setNteam(numer);
-     }
 
-    }
-    
+
+
     return (
         <>
-            <Layout style={{ flex: 0.7, justifyContent: 'center', alignItems: 'center', backgroundColor: 'green' }}>
-           
+            <Layout style={{ flex: 0.7, justifyContent: 'center', alignItems: 'center', backgroundColor: '#f1ede4' }}>
+                <Text style={styles.TeamNumber} >{nteam}</Text>
+
             </Layout>
-            <Layout style={{ flex: 0.3, justifyContent: 'center', alignItems: 'center',  }}>
-            <Layout style={{flexDirection:'row', justifyContent: 'space-between', alignItems: 'center',}}>
-            <Input
-                placeholder='Número de equipos'
-                ref={num}
+            <Layout style={{ flex: 0.3, alignItems: 'center', flexDirection: 'row', justifyContent: 'space-between', backgroundColor: '#f1ede4' }}>
+
+                <Input
+                    placeholder='Número de equipos'
+                    value={nteam}
+                    onChangeText={nextValue => {setNteam(nextValue) 
+                        getNteams(nextValue)}}
                 />
-            <Button onPress={addTeam}  appearance='ghost'
-             accessoryLeft={AddIcon}
-             />
-            </Layout>
             </Layout>
 
         </>
     )
 }
+const styles = StyleSheet.create({
+    TeamNumber: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        fontSize: 70,
+        fontFamily: 'Roboto-Bold',
+        color: '#d62828'
+    },
+})
