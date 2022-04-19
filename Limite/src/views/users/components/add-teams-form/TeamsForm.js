@@ -20,6 +20,7 @@ export default function TeamsForm({getNteams}) {
             <Layout style={{ flex: 0.3, alignItems: 'center', flexDirection: 'row', justifyContent: 'space-between', backgroundColor: '#f1ede4' }}>
 
                 <Input
+                 style={{ width: '60%' }}
                     placeholder='Número de equipos'
                     value={nteam}
                     onChangeText={nextValue => {setNteam(nextValue) 
