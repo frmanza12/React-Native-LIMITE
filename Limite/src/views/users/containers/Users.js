@@ -5,8 +5,8 @@ import TeamsForm from '../components/add-teams-form/TeamsForm'
 import UserForm from '../components/add-users-form/UserForm'
 
 export default function Users({route, navigation}) {
-  const teams = 0
-  const users = []
+  let teams = 0
+  let users = []
   const infiniteAnimationIconRef = useRef();
 
   useEffect(() => {
@@ -23,10 +23,10 @@ export default function Users({route, navigation}) {
     />
   );
   const getUserArray = (userArray) => {
-    console.log(userArray)
+    users = userArray
   }
   const getNteams = (nteam) => {
-    console.log(nteam)
+    teams = nteam
   }
   return (
     <>

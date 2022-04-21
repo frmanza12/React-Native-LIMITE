@@ -1,4 +1,7 @@
 /* eslint-disable prettier/prettier */
+/* eslint-disable jsx-quotes */
+/* eslint-disable curly */
+/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable semi */
 import { View } from 'react-native'
 import React from 'react'
@@ -30,15 +33,13 @@ export default function UserForm({ getUserArray }) {
                         onChangeText={nextValue => setUser(nextValue)}
                     />
                     <Button accessoryLeft={PlusIcon}  style={ { width:'10%', height:10} } status='warning' onPress={() => addUserToList()} />
-                    
                 </View>
             </Layout>
-            <Layout style={{ flex: 0.8, width:'60%', backgroundColor: '#f1ede4' }}>
-                <ScrollView >
+            <Layout style={{ flex: 0.8, width:'100%', backgroundColor: '#f1ede4' }}>
+                <ScrollView>
                     {userArray.map((item, index) => (
                         <Card key={index} style={styles.UserCard} status='warning'>
                             <Text style={{color:'#ffff', fontSize:20, fontFamily: 'Roboto-Bold',}}>{item}</Text>
-                           
                         </Card>
                     ))}
                 </ScrollView>
@@ -52,7 +53,7 @@ const styles = StyleSheet.create({
     UserCard: {
         shadowColor: "#000",
         backgroundColor:'#ee9b00',
-        width: '90%',
+        width: '60%',
         alignContent: 'center',
         alignSelf: 'center',
         shadowOffset: {
