@@ -5,7 +5,7 @@ import { StyleSheet } from "react-native";
 import { linear } from 'react-native/Libraries/Animated/Easing';
 
 
-export default function TeamsForm({getNteams}) {
+export default function TeamsForm({ getNteams }) {
     const inputRef = useRef();
     const [nteam, setNteam] = React.useState('');
 
@@ -20,11 +20,13 @@ export default function TeamsForm({getNteams}) {
             <Layout style={{ flex: 0.3, alignItems: 'center', flexDirection: 'row', justifyContent: 'space-between', backgroundColor: '#f1ede4' }}>
 
                 <Input
-                 style={{ width: '60%' }}
+                    style={{ width: '60%' }}
                     placeholder='Número de equipos'
                     value={nteam}
-                    onChangeText={nextValue => {setNteam(nextValue) 
-                        getNteams(nextValue)}}
+                    onChangeText={nextValue => {
+                        setNteam(nextValue)
+                        getNteams(nextValue)
+                    }}
                 />
             </Layout>
 

@@ -24,6 +24,7 @@ import * as eva from '@eva-design/eva';
 import {Home} from './src/views/home/Home';
 import Teams from './src/views/teams/container/Teams';
 import Users from './src/views/users/containers/Users';
+import RouletteView from './src/views/roulette/containers/Roulette';
 const Stack = createNativeStackNavigator();
 
 export default () => (
@@ -38,8 +39,8 @@ export default () => (
           }}>
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Users" component={Users} />
-
           <Stack.Screen name="Teams" component={Teams} />
+          <Stack.Screen name="Roulette" component={RouletteView} />
 
         </Stack.Navigator>
       </NavigationContainer>

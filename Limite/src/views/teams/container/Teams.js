@@ -1,10 +1,17 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable semi */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react'
-import { Layout, Button, Card, Text, Icon } from '@ui-kitten/components'
-import { ScrollView , StyleSheet} from 'react-native';
+import { Layout, Button, Card, Text, Icon, ModalService, Input, Modal } from '@ui-kitten/components'
+import { ScrollView, StyleSheet, } from 'react-native';
+import { View, TextInput } from 'react-native'
 
-
+const RefreshTeams = (props) => (
+  <Icon {...props} name='refresh-outline' />
+);
+const EditName = (props) => (
+  <Icon {...props} name='edit-outline' />
+);
 // create n teams with randoms users from an array
 
 export default function Teams({ route, navigation }) {
@@ -48,12 +55,45 @@ export default function Teams({ route, navigation }) {
 
   }
 
+  let modalID = '';
+  const editTeamName = (item) => {
+    const contentElement = renderModalContentElement(item);
+    modalID = ModalService.show(contentElement, { onBackdropPress: hideModal });
+  };
+
+  const hideModal = () => {
+    ModalService.hide(modalID);
+  };
+
+  const renderModalContentElement = (item) => {
+    console.log(item)
+    return (
+      <Layout style={{ flex: 0.8, backgroundColor: 'rgba(0, 0, 0, 0.5)', width: '100%', alignItems: 'center', alignContent: 'center' }}>
+        <Card disabled={true}>
+
+          <TextInput
+            style={{ width: '100%' }}
+            onChangeText={text => {
+              let auxTeam = teams
+              auxTeam[item.id].name = text
+              setTeams(auxTeam)
+            }}
+            value={item.name}
+            placeholder="useless placeholder"
+
+          />
+
+        </Card>
+      </Layout>
+
+    );
+  };
   const createTeans = (TeansArray) => {
     const teams = [];
     TeansArray.forEach((element, index) => {
       const team = {
         id: index,
-        name: `Team ${index + 1}`,
+        name: `Equipo ${index + 1}`,
         users: element,
         points: 0,
       }
@@ -62,6 +102,7 @@ export default function Teams({ route, navigation }) {
     setTeams(teams)
   }
   const [teams, setTeams] = useState([])
+
   useEffect(() => {
     console.log(route.params)
     createGropus(route.params.players, route.params.nTeams)
@@ -69,41 +110,57 @@ export default function Teams({ route, navigation }) {
 
   return (
     <>
-     <Layout style={{ flex: 0.1,  backgroundColor: '#f1ede4' ,  width:'100%',}}>
-
-     </Layout>
-      <Layout style={{ flex: 0.8,  backgroundColor: '#f1ede4' ,  width:'100%',}}>
-      <ScrollView>
-                    {teams.map((item, index) => (
-                        <Card key={index} style={styles.teamCard} status='warning'>
-                            <Text style={{color:'#ffff', fontSize:20, fontFamily: 'Roboto-Bold',}}>{item.users}</Text>
-                        </Card>
-                    ))}
-                </ScrollView>
+      <Layout style={{ flex: 0.1, backgroundColor: '#f1ede4', width: '100%', alignItems: 'center' }}>
+        <Button accessoryLeft={RefreshTeams} status='basic' appearance='ghost' onPress={() => createGropus(route.params.players, route.params.nTeams)} />
       </Layout>
-      <Layout style={{ flex: 0.1,  backgroundColor: '#f1ede4' ,  width:'100%',}}>
+      <Layout style={{ flex: 0.7, backgroundColor: '#f1ede4', width: '100%', }}>
+        <ScrollView>
+          {teams.map((item, index) => (
+            <Card key={index} style={styles.teamCard} status='warning'>
+              <View style={{ width: '100%', alignItems: 'center', marginBottom: 10 }}>
+                <Text category='h5' style={{ alignSelf: 'center' }}>{item.name}</Text>
+              </View>
+              {item.users.map((user, index) => (
+                <Text key={index} style={{ color: '#ffff', fontSize: 25, fontFamily: 'Roboto-Bold', }}>{user}</Text>
+              ))}
+            </Card>
+          ))}
+        </ScrollView>
 
-     </Layout>
+      </Layout>
+      <Layout style={{ flex: 0.2, backgroundColor: '#f1ede4', width: '100%', alignContent: 'center', alignItems: 'center' }}>
+        <Button status='warning' onPress={() => navigation.navigate('Roulette', { teams: teams })}>
+          Go!
+        </Button>
+      </Layout>
+
+
     </>
   )
 }
 
 const styles = StyleSheet.create({
   teamCard: {
-      shadowColor: "#000",
-      backgroundColor:'#ee9b00',
-      width: '60%',
-      alignContent: 'center',
-      alignSelf: 'center',
-      shadowOffset: {
-          width: 0,
-          height: 7,
-      },
-      shadowOpacity: 0.43,
-      shadowRadius: 9.51,
-      alignItems: 'center', 
-      marginBottom: 10,
-      elevation: 10,
-      padding: 0,
+    shadowColor: "#000",
+    backgroundColor: '#ee9b00',
+    width: '60%',
+    alignContent: 'center',
+    alignSelf: 'center',
+    shadowOffset: {
+      width: 0,
+      height: 7,
+    },
+    shadowOpacity: 0.43,
+    shadowRadius: 9.51,
+
+    marginBottom: 10,
+    elevation: 10,
+    padding: 0,
+  },
+  container: {
+    minHeight: 192,
+  },
+  backdrop: {
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
 })
