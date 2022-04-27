@@ -21,14 +21,7 @@ import { useState } from 'react';
         'En equipo',
         'Trivial',
     ];
-    const [animatePress, setAnimatePress] = useState(new Animated.Value(1));
-    const animateIn = () => {
-        Animated.timing(animatePress, {
-          toValue: 0.5,
-          duration: 500,
-          useNativeDriver: true, // Add This line
-        }).start();
-      };
+   
     useEffect(() => {
         console.log(route.params)
 
@@ -37,13 +30,14 @@ import { useState } from 'react';
 
     const options = numbers.map(o => ({ index: o }));
     const customOptions = numbers.map((o, index) => (
+        
         <Text
             style={
-                index == 2 || index == 6
+                index === 2 || index === 6
                     ? { color: 'black', fontWeight: 'bold', fontSize: 15 }
                     : { color: 'white', fontWeight: 'bold', fontSize: 15 }
             }
-            index={o}>
+            index={index}>
             {o}
         </Text>
     ));
@@ -63,6 +57,9 @@ import { useState } from 'react';
                     rotateEachElement={index =>
                         ((index * 360) / options.length) * -1 - 90
                     }
+                    onRotate={(item, index) => {
+                        console.log(item.props.index)
+                    }}
                     markerWidth={200}></Roulette>
             </Layout>
         </>
