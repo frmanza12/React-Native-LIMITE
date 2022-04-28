@@ -129,7 +129,7 @@ export default function Teams({ route, navigation }) {
 
       </Layout>
       <Layout style={{ flex: 0.2, backgroundColor: '#f1ede4', width: '100%', alignContent: 'center', alignItems: 'center' }}>
-        <Button status='warning' onPress={() => navigation.navigate('Roulette', { teams: teams })}>
+        <Button style={{marginTop:20}} status='warning' onPress={() => navigation.navigate('Roulette', { teams: teams })}>
           Go!
         </Button>
       </Layout>

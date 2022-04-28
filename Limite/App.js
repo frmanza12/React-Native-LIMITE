@@ -25,6 +25,10 @@ import {Home} from './src/views/home/Home';
 import Teams from './src/views/teams/container/Teams';
 import Users from './src/views/users/containers/Users';
 import RouletteView from './src/views/roulette/containers/Roulette';
+import Group from './src/views/games/group/Group';
+import Trivial from './src/views/games/trivial/Trivial';
+import Individual from './src/views/games/individual/Individual';
+import Special from './src/views/games/special/Special';
 const Stack = createNativeStackNavigator();
 
 export default () => (
@@ -42,6 +46,10 @@ export default () => (
           <Stack.Screen name="Teams" component={Teams} />
           <Stack.Screen name="Roulette" component={RouletteView} />
 
+          <Stack.Screen name="enEquipo" component={Group} />
+          <Stack.Screen name="Individual" component={Individual} />
+          <Stack.Screen name="Trivial" component={Trivial} />
+          <Stack.Screen name="Especial" component={Special} />
         </Stack.Navigator>
       </NavigationContainer>
     </ApplicationProvider>
